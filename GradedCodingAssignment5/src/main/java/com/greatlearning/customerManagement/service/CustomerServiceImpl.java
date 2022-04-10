@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	private SessionFactory sessionFactory;
 
-	// create session
+	//Create a session
 	private Session session;
 
 	@Autowired
@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> findAll() {
 		Transaction tx = session.beginTransaction();
 		
-		//find all the record from the database table
+		//Find all the record from the database table
 		List<Customer> customers = session.createQuery("from Customer").list();
 		
 		tx.commit();
@@ -50,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		Transaction tx = session.beginTransaction();
 		
-		//find record with Id from the database table
+		//Find record with Id from the database table
 		customer = session.get(Customer.class, theId);
 		
 		tx.commit();
@@ -61,7 +61,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Transactional
 	public void save(Customer theCustomer) {
-		// TODO Auto-generated method stub
 		Transaction tx = session.beginTransaction();
 		
 		session.saveOrUpdate(theCustomer);
@@ -73,24 +72,20 @@ public class CustomerServiceImpl implements CustomerService {
 	public void deleteById(int theId) {
 		 
 		Transaction tx = session.beginTransaction();
-		
-		//get transaction
-		
+		//Get transaction
 		Customer customer = session.get(Customer.class, theId);
 		
-		//delete record
+		//Delete record
 		session.delete(customer);
 		tx.commit();
 	}
 	
-	// print the loop
+	//Print the loop
 	@Transactional
 	public void print(List<Customer> customer) {
 		
 		for(Customer c : customer) {
 			System.out.println(c);
-		}
-		
-	}
-	
+		}		
+	}	
 }
