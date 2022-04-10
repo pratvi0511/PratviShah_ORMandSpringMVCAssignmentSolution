@@ -9,9 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="customer")
-public class Customer{
-	//define fields
-	
+public class Customer{	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -74,7 +72,4 @@ public class Customer{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
 }
