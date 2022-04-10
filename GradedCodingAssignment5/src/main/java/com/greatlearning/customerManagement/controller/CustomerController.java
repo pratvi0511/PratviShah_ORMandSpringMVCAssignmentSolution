@@ -17,15 +17,13 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
-	
-	// add mapping for "/list"
-	
+		
 	@RequestMapping("/list")
 	public String listCustomers(Model theModel) {
-		//get customer from db
+		//Getting customer from db
 		List<Customer> theCustomers = customerService.findAll();
 		
-		//add to the spring model
+		//Adding to the spring model
 		theModel.addAttribute("Customers", theCustomers);
 		
 		return "list-Customers";
@@ -34,7 +32,7 @@ public class CustomerController {
 	@RequestMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
 		
-		// create model attribute to bind form data
+		//Creating a model attribute to bind form data
 		Customer theCustomer = new Customer();
 		
 		theModel.addAttribute("Customer", theCustomer);
@@ -45,10 +43,8 @@ public class CustomerController {
 	@RequestMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("customerId") int theId,Model theModel) {
 		
-		// get the Customer from the service
 		Customer theCustomer = customerService.findById(theId);
 		
-		// set Customr as a model attribute to pre-populate the form
 		theModel.addAttribute("Customer", theCustomer);
 		
 		return "Customer-form";
@@ -72,20 +68,15 @@ public class CustomerController {
 		}else {
 			theCustomer = new Customer(firstName, lastName, email);
 		}
-		// save the customer
 		customerService.save(theCustomer);
 		
-		// use a redirect to prevent duplicate submission
 		return "redirect:/customers/list";
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("customerId") int theId) {
-		//delete the Book
 		customerService.deleteById(theId);
-		
-		// redirect to /Customers/list
-		
+				
 		return "redirect:/customers/list";
 	}
 }
